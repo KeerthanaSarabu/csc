@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
+    <script type="text/javascript">
+        
+
+        $(document).ready(function() {
+
+            var customerViewModel = function() {
+            var self = this;
+            self.firstName = ko.observable("");
+            self.lastName = ko.observable("");
+            self.email = ko.observable("");
+self.ph = ko.observable("");
+self.cer = ko.observable("");
+self.sp = ko.observable("");
+self.br = ko.observable("");
+
+            self.searchKey = ko.observable("");
+
+            self.getCustomerDetails = function () {              
+                $.ajax({
+                    url: 'https://rfgyge5g5l.execute-api.us-east-1.amazonaws.com/dev',
+                    cache: false,
+                    type: 'GET',                   
+                    data: { "Email": self.searchKey() },
+                    success: function (data) {              
+                        self.firstName(data.Item.FirstName)
+                        self.lastName(data.Item.LastName),
+                        self.email(data.Item.Email),
+				self.ph(data.Item.PhoneNumber),
+				self.cer(data.Item.Certificates),
+				self.sp(data.Item.Specialised),
+				self.br(data.Item.Branch)                    }
+                });
+            }
+        }
+
+            var viewModel = new customerViewModel();
+            ko.applyBindings(viewModel);
+         });
+
+       
+    </script>
+<style>
+a:link, a:visited {
+  background-color: skyblue;
+  color: black;
+  padding: 7px 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: purple;
+}
+</style>
+</head>
+<marquee behavior="scroll" direction="left">CSC PROJECT : FACULTY MANAGEMENT SYSTEM</marquee>
+
+<body>
+  <body>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/78/KL_University_logo.svg/1200px-KL_University_logo.svg.png" alt="logo" style="width:200px;height:90px;">
+<style>
+body {
+  background-image: url('https://media.istockphoto.com/id/1189574439/photo/geometric-waves-abstract-white-background.jpg?s=170667a&w=0&k=20&c=LY6juEhTMbc72Lt6RiV4C8LO9n2OqftFj8PL2PKSdZ0=');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>	
+<center>
+    <table style="background-image: url('https://img.freepik.com/free-vector/gradient-grainy-texture_23-2148987745.jpg');">
+          <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+
+        <tr>
+            <td>Search Key(Email):</td>
+            <td><input type="text" id="txtSearchKey" data-bind="value : searchKey"/></td>
+        </tr>
+    </table>
+
+    <br />
+  
+     <table id="CustomerDetails" style="background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBwgHBw0HBwcHBw0HBwcHBw8ICQcNFREWFhURExMYHSggGBolGx8fITEhMSkrLi4uFx8zODMsNygtLisBCgoKDQ0NDw0NDysZFRkrKy0rKzcrKy0rLS0tNzctLSsrKy0rLSstLSsrKysrKystLTcrLSsrKy0rLSsrKysrK//AABEIALcBEwMBIgACEQEDEQH/xAAbAAADAQEBAQEAAAAAAAAAAAAAAQIDBAYFB//EABgQAQEBAQEAAAAAAAAAAAAAAAABEQIS/8QAGgEBAQEBAQEBAAAAAAAAAAAAAQIAAwQFBv/EABgRAQEBAQEAAAAAAAAAAAAAAAABEQIS/9oADAMBAAIRAxEAPwD9otRadqLVyPOLU2i1Nq4qFamnamqVCqadKqVCqadKkpqaqlVKiKmrqaqKiKirqaqLiKWKwYSnBisGMdLBisGJ1tTgxeDBp1GKxUh4NOow8Xh4NVqMGLwYNVOmeDGmFjaudM8LGuJsbXSdM8C8M6v0+1am0WptcJH5+FamnU0xUFTTqVKFKilVKKlVJKiqaoqSipq6mmKRU4vBilIwYvCxtbUYeKwY2tqcPFYeJbU4cipDkGtqZDxchyJ1tRh4vDwarWeDGmDBqpWeFjTBjauVlhWNbE2HVzpnhNMDav0+ham0Wlah8aC1NFJUVAQBUQAKiIwSkqomKKmtKnFKTgxWDG1kYMXgxtbUYMXgwaNThyKw5BramRUipFSJtGpkORUh4nW1ODF4eJ06jBi8GNqpWeFjXCxtVKysKxrYmxtdJWWBeA6vW9qbRaWqx8yAgRioZAFQADEAwxThYvCwlFgxWDGKcGKwYwThYvBjaE4MVgwaNKRUhyHIm1tKRUhyGkaJDw4cS2lh4IYbSwYoxp1ngxphYNXKysKxrYmwyrlZYF4CvWdpaWlru8MMECqGCDKijiYcCjMQ4xLBisGApwYrBjBGDFEQWDDABYcgABwyhgHDhQ4GOHChxLCKKGCIcKGKTMocSSsTY0KxjKywLwzqtcGjU6NevHmh6NTo04qL0J05RiouHERUoUuKiJVQKXAUMEipprAECKTIAAxChgHDIwDhkcDGcKHEscMjBEMjgpMyhpJgBmGABmfK0tTo17scIrRqdGti4vT1GnK2Ki5VSs5VSjFNJVSspVSjFNdPWXo9GMvS0tLQDIaWsDBGwM0mAZkaQo0mGUcScTWOGUME4cKGCcMoYJgjBAAZnxNGo0a+jjzxejUaNbFRpp6y09bFxrKcrLT9DFNZT9MvR+hha+lTphOlToWFt6GsvStGBejUynoxKjToAUaTAUaYqJZRpOJZRxJwVlGlSScNMUFGCMEzIwQQDM8/panS19THli9Gs9HpsVGujWfoemxca+j9MfR+mxUa+h6Zeh6bFNp0qdOedKnQxnR6OdMJ0udJsDaVUrGVcqLE1rKes5VSjAuU0aqVIVFREOVLLhxMOJKoaVQMo4mGkqNJwKUcScSVAgCYBMzzNpai0rX18eOVfoemel6OLjX0PTL0PTYqNfQ9MvQ9Ni419D0y9F6PlTadKnTnnSp0LyXTOlzpzzpc6RYHROlysJ0udIsS3lVKxlXKiwNZVSs5VSosSuVUqJTlSVxURKcorLhxMpypK4aNOVNK4aYehSlIPUlQTp6CemnQweTtK1FpXp9rHhlXpemd6K9HFytPQ9MvRelYuVr6Hpj6HpvK5WvoemPovR8qjadL56c06ac9C8l089NOenNz00nTnYzpnS505p00nTnYHROmkrnnS50iwOidLlYc1crnYlvKcrOVUqLGaSnKiU5Us0lOVEpypsLTTlRp6FLlOJlOVOKXp6jRowr0anRowK0I9BsZ5C9JvQD7b50L0V6AU6RPor0AcdIXpPoBWLhXovRhlQTppz0A1U056ac9AOVZpz0056Ac6zTnppz0A50L56aToBFC+elzoBzoXKqUBFZUpygJKpTlAST1UoAUejQAR6TegGxk+gAS/9k=');">
+        <thead>
+            <tr>
+                <td>First Name:</td>
+                <td><label id="firstName" data-bind="text: firstName"/></td>
+            </tr>
+
+            <tr>
+                <td>Last Name:</td>
+                <td><label id="lastName" data-bind="text: lastName"/></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><label id="email" data-bind="text: email"/></td>
+            </tr>
+<tr>
+                <td>Branch:</td>
+                <td><label id="br" data-bind="text: br"/></td>
+            </tr>
+<tr>
+                <td>Phone Number:</td>
+                <td><label id="ph" data-bind="text: ph"/></td>
+            </tr>
+<tr>
+                <td>Certificates:</td>
+                <td><label id="cer" data-bind="text: cer"/></td>
+            </tr>
+<tr>
+                <td>Specialised:</td>
+                <td><label id="sp" data-bind="text: sp"/></td>
+            </tr>
+<tr>
+                <td>Email:</td>
+                <td><label id="email" data-bind="text: email"/></td>
+            </tr>
+          
+        </thead>
+      
+        </table>
+</ceter>
+
+    <br />
+  
+  <table>
+<tr>
+    <td><input type="button" value="GetCustomerDetails" data-bind="click: $root.getCustomerDetails()"/></td>
+</tr>
+  </table>
+
+<a href="POST.html" target="_blank">	UPLOAD FACULTY DETAILS </a>
+<footer>
+  <p>Author: Keerthana sarabu<br>
+  <a href="mailto:2000031606@kluniversity.in">2000031606@kluniversity.in</a></p>
+</footer>
+
+</body>
+</html>

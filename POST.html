@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="knockout-3.4.2.js"></script>
+    <script type="text/javascript">
+        
+
+		jQuery.support.cors = true;
+		
+        $(document).ready(function() {
+
+            var customerDetailsViewModel = function() {
+            var self = this;
+			
+		self.Email = ko.observable("");
+		self.Branch = ko.observable("");
+		self.Certificates = ko.observable("");
+            self.FirstName = ko.observable("");
+            self.LastName = ko.observable("");
+		self.PhoneNumber = ko.observable("");
+		self.Specialised = ko.observable("");
+            self.SuccessMessage = ko.observable("");		
+
+            self.SaveCustomerDetails = function () {              
+                
+				var CustomerDetail = {
+				
+				Email: self.Email(),
+				Branch: self.Branch(),
+				Certificates: self.Certificates(),
+				FirstName: self.FirstName(),
+				LastName: self.LastName(),
+				PhoneNumber: self.PhoneNumber(),
+				Specialised: self.Specialised()
+				
+				}
+				
+								
+				$.ajax({
+			  crossDomain: true,	
+                    url: 'https://khiqqhdo7h.execute-api.us-east-1.amazonaws.com/dev',	
+                    cache: false,
+                    type: 'POST', 
+                    data: ko.toJSON(CustomerDetail),
+                    success: function (data) {              
+                        self.SuccessMessage(data)
+							self.Email('');
+							self.Branch('');
+							self.Certificates('');
+							self.FirstName('');
+							self.LastName('');
+							self.PhoneNumber('');
+							self.Specialised('');
+
+							
+						
+                    }
+					}).fail(
+					
+					
+					function(xhr, textStatus, err){
+					alert("Error happened "+err);
+					
+                });
+            };
+        }
+
+            var viewModel = new customerDetailsViewModel();
+            ko.applyBindings(viewModel);
+         });
+
+       
+    </script>
+</head>
+<body>
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/78/KL_University_logo.svg/1200px-KL_University_logo.svg.png" alt="logo" style="width:200px;height:90px;">
+<style>
+body {
+  background-image: url('https://media.istockphoto.com/id/1189574439/photo/geometric-waves-abstract-white-background.jpg?s=170667a&w=0&k=20&c=LY6juEhTMbc72Lt6RiV4C8LO9n2OqftFj8PL2PKSdZ0=');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>
+<center>
+
+    <table style="background-image: url('https://img.freepik.com/free-vector/gradient-grainy-texture_23-2148987745.jpg');">
+ <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+        <tr>
+            <td>
+				<div>
+				<p>
+					Email:
+					<input data-bind='value: Email' />
+					
+					</p>
+<p>
+					Branch:
+					<input data-bind='value: Branch' />
+					
+					</p>
+					<p>
+					Certificates:
+					<input data-bind='value: Certificates' />
+					
+					</p>
+					<p>
+					
+						FirstName:
+						<input data-bind='value: FirstName' />
+						</p>
+						<p>
+						LastName:
+						<input data-bind='value: LastName' />
+						</p>
+<p>
+					PhoneNumber:
+					<input data-bind='value: PhoneNumber' />
+					
+					</p><p>
+					Specialised:
+					<input data-bind='value: Specialised' />
+					
+					</p>
+						
+						</div>
+						
+					<span style ="color: darkolivegreen" data-bind='text : SuccessMessage' />
+					
+				</td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+								<button data-bind="click: $root.SaveCustomerDetails"> Save </button>
+							</div>
+						</td>
+					</tr>
+					
+				</table>
+				</center>
+<marquee behavior="scroll" direction="left">DEVELOPED BY 2000031606</marquee>
+				</body>
+				</html>
